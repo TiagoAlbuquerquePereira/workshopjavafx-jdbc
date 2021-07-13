@@ -43,7 +43,7 @@ public class MainViewController implements Initializable {
 
 	@FXML
 	private void onMenuItemDepartmentAction() {
-		System.out.println("onMenuItemDepartmentAction");
+		loadView("/gui/DepartmentList.fxml");
 	}
 
 	@FXML
@@ -53,10 +53,9 @@ public class MainViewController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
 	}
 
-	private void loadView(String absoluteName) {
+	private synchronized void loadView(String absoluteName) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			VBox newVbox = loader.load();
@@ -71,7 +70,6 @@ public class MainViewController implements Initializable {
 
 		catch (IOException e) {
 			Alerts.showAlert("IOException", "Error loading view", e.getMessage(), AlertType.ERROR);
-
 		}
 
 	}
